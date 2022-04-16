@@ -7,6 +7,7 @@ function createGrid(size) {
         for(let j = 0; j< size; j++){
             const cell = document.createElement('div');
             cell.className = 'cell';
+            cell.addEventListener('mouseover', () => hoverEvent(cell));
             row.append(cell);
         }
     }
@@ -31,7 +32,13 @@ function setSize(){
 }
 
 function clearGrid() {
+    console.log("clearGrid() called");
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(e => e.style.backgroundColor='transparent');
+}
 
+function hoverEvent(div) {
+    div.style.backgroundColor = 'purple';
 }
 
 const sizeButton = document.querySelector('.menu .size');
@@ -39,3 +46,8 @@ const resetButton = document.querySelector('.menu .reset');
 
 sizeButton.addEventListener('click', () => setSize());
 resetButton.addEventListener('click',() => clearGrid());
+
+const cells = document.querySelectorAll('.cell');
+cells.forEach((div) => {
+    div.addEventListener('mouseover', () => hoverEvent(div));
+});
